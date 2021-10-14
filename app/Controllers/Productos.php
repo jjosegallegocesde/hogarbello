@@ -18,6 +18,20 @@ class Productos extends BaseController{
         $descripcion=$this->request->getPost("descripcion");
         $tipoAnimal=$this->request->getPost("tipoAnimal");
 
+        //aplico las validaciones
+        if($this->validate('formularioProductos')){
+
+            echo("TODO BIEN AGONIA");
+
+        }else{
+            $mensaje="Revise por favor hay datos obligatorios";
+    
+            return redirect()->to(site_url('/registro/productos'))->with('mensaje',$mensaje);
+
+        }
+
+
+
         //se crea un arreglo con los datos recibidos
 
         $datos=array(

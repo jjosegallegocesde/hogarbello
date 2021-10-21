@@ -2,6 +2,9 @@
 
 namespace App\Controllers;
 
+//IMPORTO EL MODELO
+use App\Models\ProductoModelo;
+
 class Productos extends BaseController{
     
     public function index(){
@@ -21,7 +24,32 @@ class Productos extends BaseController{
         //aplico las validaciones
         if($this->validate('formularioProductos')){
 
-            echo("TODO BIEN AGONIA");
+           try{
+
+            //creo un objeto del modelo de productos
+            $modelo=new ProductoModelo();
+
+             //se crea un arreglo con los datos recibidos
+            $datos=array(
+                "producto"=>$producto,
+                "foto"=>$foto,
+                "precio"=>$precio,
+                "descripcion"=>$descripcion,
+                "tipo"=>$tipoAnimal
+            );
+
+            $modelo->insert($datos);
+
+            $mensaje="exito agrgando el producto";
+            return redirect()->to(site_url('/registro/productos'))->with('mensaje',$mensaje);
+
+
+           }catch(\Exception $error){
+
+               $mensaje=$error->getMessage();
+               return redirect()->to(site_url('/registro/productos'))->with('mensaje',$mensaje);
+               
+           }
 
         }else{
             $mensaje="Revise por favor hay datos obligatorios";
@@ -32,15 +60,7 @@ class Productos extends BaseController{
 
 
 
-        //se crea un arreglo con los datos recibidos
-
-        $datos=array(
-            "producto"=>$producto,
-            "foto"=>$foto,
-            "precio"=>$precio,
-            "descripcion"=>$descripcion,
-            "tipoAnimal"=>$tipoAnimal
-        );
+       
 
 
     }

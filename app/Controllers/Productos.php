@@ -38,6 +38,7 @@ class Productos extends BaseController{
                 "tipo"=>$tipoAnimal
             );
 
+            
             $modelo->insert($datos);
 
             $mensaje="exito agrgando el producto..";
@@ -58,10 +59,31 @@ class Productos extends BaseController{
 
         }
 
+    }
+
+    public function buscar(){
+
+        try{
+
+            //creo un objeto del modelo de productos
+            $modelo=new ProductoModelo();
+
+            $resultado=$modelo->findAll();
+
+            $productos=array("productos"=>$resultado);
+
+            return view('listaProductos',$productos);
 
 
-       
+           }catch(\Exception $error){
 
+               $mensaje=$error->getMessage();
+               return redirect()->to(site_url('/registro/productos'))->with('mensaje',$mensaje);
+               
+           }
+
+
+        
 
     }
 

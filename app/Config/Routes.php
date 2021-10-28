@@ -36,6 +36,8 @@ $routes->get('/registro/productos', 'Productos::index');
 
 $routes->post('/registro/productos/nuevo', 'Productos::registrar');
 
+$routes->get('/producto/buscar', 'Productos::buscar');
+
 
 
 /*

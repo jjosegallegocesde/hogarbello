@@ -36,6 +36,9 @@
 						<li class="nav-item">
 							<a class="nav-link" href="#">Registro Animales</a>
 						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="<?= site_url('/producto/buscar') ?>">ver inventario</a>
+						</li>
 					</ul>
 				</div>
 			</div>

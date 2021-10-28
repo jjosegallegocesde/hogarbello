@@ -39,6 +39,9 @@
 						<li class="nav-item">
 							<a class="nav-link" href="#">Registro Animales</a>
 						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#">Lista de productos</a>
+						</li>
 					</ul>
 				</div>
 			</div>

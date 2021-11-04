@@ -82,8 +82,67 @@ class Productos extends BaseController{
                
            }
 
+    }
 
+    public function eliminar($id){
+
+       try{
+        $modelo=new ProductoModelo();
+        $modelo->where('id',$id)->delete();
+        $mensaje="exito eliminando el producto..";
+        return redirect()->to(site_url('/registro/productos'))->with('mensaje',$mensaje);
+
+
+       }catch(\Exception $error){
+
+        $mensaje=$error->getMessage();
+        return redirect()->to(site_url('/registro/productos'))->with('mensaje',$mensaje);
         
+        }
+
+    }
+
+    public function editar($id){
+
+        //Recibo datos a editar
+        $precio=$this->request->getPost("precio");
+
+        //aplico las validaciones
+        if($this->validate('formularioEdicion')){
+
+            try{
+ 
+             //creo un objeto del modelo de productos
+             $modelo=new ProductoModelo();
+ 
+              //se crea un arreglo con los datos recibidos
+             $datos=array(
+               
+                "precio"=>$precio
+                 
+             );
+ 
+             
+             $modelo->update($id,$datos);
+ 
+             $mensaje="exito editando el producto..";
+             return redirect()->to(site_url('/registro/productos'))->with('mensaje',$mensaje);
+ 
+ 
+            }catch(\Exception $error){
+ 
+                $mensaje=$error->getMessage();
+                return redirect()->to(site_url('/registro/productos'))->with('mensaje',$mensaje);
+                
+            }
+ 
+         }else{
+             $mensaje="Revise por favor hay datos obligatorios";
+     
+             return redirect()->to(site_url('/registro/productos'))->with('mensaje',$mensaje);
+ 
+         }
+
 
     }
 
